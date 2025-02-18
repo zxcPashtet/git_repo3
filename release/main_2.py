@@ -2,15 +2,23 @@ import sys
 from PyQt6 import uic
 import sqlite3
 from PyQt6.QtWidgets import QApplication, QMainWindow
+from interface_main_2 import Ui_Form
+import os
 
 
-class Edit(QMainWindow):
+#os.chdir('..')
+#os.chdir('Data')
+
+
+class Edit(QMainWindow, Ui_Form):
     def __init__(self, last):
         self.last = last
         super().__init__()
-        self.connection = sqlite3.connect('coffee.sqlite')
-        self.cursor = self.connection.cursor()
-        uic.loadUi('addEditCoffeeForm.ui', self)
+        self.connection = last.connection
+        self.cursor = last.connection.cursor()
+        #os.chdir('..')
+        #os.chdir('release')
+        self.setupUi(self)
         self.pushButton.clicked.connect(self.run)
         self.pushButton_2.clicked.connect(self.edit)
         self.pushButton_3.clicked.connect(self.end_edit)
@@ -72,6 +80,5 @@ class Edit(QMainWindow):
                 self.label_8.setText('Нельзя добавить/обновить запись, не указав сорт')
 
     def end_edit(self):
-        self.connection.close()
         self.last.show()
         self.hide()
