@@ -2,6 +2,7 @@ import sys
 from PyQt6 import uic
 import sqlite3
 from PyQt6.QtWidgets import QApplication, QMainWindow
+from main_2 import Edit
 
 
 class MyWidget(QMainWindow):
@@ -11,6 +12,7 @@ class MyWidget(QMainWindow):
         self.cursor = self.connection.cursor()
         uic.loadUi('Main.ui', self)
         self.pushButton.clicked.connect(self.render)
+        self.pushButton_2.clicked.connect(self.end)
 
     def render(self):
         name_coffee = self.lineEdit.text()
@@ -37,6 +39,13 @@ class MyWidget(QMainWindow):
             self.label_5.setText('')
             self.label_6.setText('')
             self.label_7.setText('')
+
+    def end(self):
+        print(self)
+        self.win = Edit(self)
+        self.hide()
+        self.win.show()
+
 
 
 if __name__ == '__main__':
