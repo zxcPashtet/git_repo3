@@ -9,11 +9,7 @@ from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton
 class MyWidget(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setGeometry(0, 0, 745, 617)
-        self.setWindowTitle('Рисование')
-        self.pushButton = QPushButton('Создать', self)
-        self.pushButton.move(230, 490)
-        self.pushButton.resize(271, 71)
+        uic.loadUi('Ui.ui', self)
         self.pushButton.clicked.connect(self.paint)
         self.do_paint = False
 
@@ -30,7 +26,7 @@ class MyWidget(QMainWindow):
         self.update()
 
     def draw_circle(self, qp):
-        qp.setBrush(QColor(randint(0, 255), randint(0, 255), randint(0, 255)))
+        qp.setBrush(QColor(255, 255, 0))
         x = randint(0, 700)
         y = randint(0, 450)
         r = randint(0, 100)
